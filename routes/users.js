@@ -32,12 +32,12 @@ router.post('/register',function(req,res){
     var password =req.body.password;
     var password2 =req.body.password2;
     
-
+   
     //check data
     req.checkBody('username','Username is required!').notEmpty();
     req.checkBody('email','Email is required!').notEmpty();  
     req.checkBody('password','password is required!').notEmpty();
-    req.checkBody('password2','password is required!').notEmpty();
+    req.checkBody('password2','password2 is required!').notEmpty();
     req.checkBody('password2','password is not same!').equals(req.body.password);
     
     
@@ -63,10 +63,14 @@ router.post('/register',function(req,res){
               
             }
            
+        }else if(errors){
+            res.render('register',{
+                errors:errors
+            })
         }
         //if not error
         else{
-            
+            console.log('no error')
             // console.log('register success')
             // console.log('username:'+username);
             // console.log('email:'+email);
