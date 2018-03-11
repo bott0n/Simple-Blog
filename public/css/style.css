@@ -1,0 +1,53 @@
+
+
+
+
+.panel{
+    margin:0 auto;
+  
+}
+@media (min-width: 769px) {
+    .header{
+        margin:0px auto;
+        width:1200px;
+    }
+    .panel{
+         margin:0px auto;
+         width:1000px;
+        
+     }
+   }
+@media (max-width: 768px) {
+   .panel{
+        margin:0px auto;
+       
+    }
+  }
+
+
+  /* Article page style */
+
+  #article .article-panel{
+
+    border:5px solid #695656;
+    border-radius:45px;
+    height:800px;
+  }
+
+
+
+
+/* edit Page */
+#cke_1_resizer{
+    display:none;
+    visibility: hidden;
+}
+
+#cke_1_contents{
+
+    height:800px !important;
+    box-shadow:0 0 0 0;
+
+}
+  
+  

@@ -1,0 +1,41 @@
+
+{{#if user}}
+  <h1>You have been login</h1>
+{{else}}
+<div class="col-md-8 order-md-1 ">
+          <h4 class="mb-3">Login</h4>
+          <form class="needs-validation" method='post' action='/users/login'>       
+            <div class="mb-3">
+              <label for="username">Username</label>
+              <div class="input-group">
+                <div class="input-group-prepend">              
+                </div>
+                <input type="text" class="form-control" id="username" placeholder="Username" required="" name='username'>
+               
+              </div>
+            </div>
+
+           
+
+            <div class="mb-3">
+              <label for="password">password </label>
+              <input type="password" class="form-control" id="password" placeholder="password" name='password'>
+             
+            </div>         
+             
+            <hr class="mb-4">
+            <button class="btn btn-primary btn-lg btn-block" type="submit">Login</button>
+       
+          
+
+          {{#if error}}
+            <div class="alert alert-danger">{{error}}</div>
+          {{/if}}
+             {{#if errors}}
+                {{#each errors}}
+            <label for="alert" class='alert alert-danger' style='width:100%; text-align: center;margin-top:10px;'>{{msg}}</label><br>
+                {{/each}}
+            {{/if}}
+          </form>
+        </div>
+        {{/if}}

@@ -1,0 +1,8 @@
+.panel{
+    margin:0 auto;
+}
+@media (mix-width: 768px) {
+   .panel{
+        margin:0px;
+    }
+  }

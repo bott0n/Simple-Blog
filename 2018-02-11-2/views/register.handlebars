@@ -1,0 +1,47 @@
+<div class="col-md-8 order-md-1 panel">
+          <h4 class="mb-3">Register</h4>
+          
+          <form class="needs-validation" method='post' action='/users/register'>
+       
+            <div class="mb-3">
+              <label for="username">Username</label>
+             
+              
+            
+              <div class="input-group">
+                <div class="input-group-prepend">
+                 
+                </div>
+                <input type="text" class="form-control" id="username" placeholder="Username" required="" name='username'
+                onkeyup='checkRegAcc()'>
+               
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="email">Email <span class="text-muted">(Optional)</span></label>
+              <input type="email" class="form-control" id="email" placeholder="you@example.com" name='email'>
+              
+            </div>
+
+            <div class="mb-3">
+              <label for="password">Password </label>
+              <input type="password" class="form-control" id="password" placeholder="password" name='password'>
+             
+            </div>
+
+            <div class="mb-3">
+              <label for="password">Password2 </label>
+              <input type="password" class="form-control" id="password2" placeholder="password2" name='password2'>
+              
+            </div>
+             
+            <hr class="mb-4">
+            <button class="btn btn-primary btn-lg btn-block" type="submit">Register</button>
+            {{#if errors}}
+                {{#each errors}}
+            <label for="alert" class='alert alert-danger' style='width:100%; text-align: center;margin-top:10px;'>{{msg}}</label><br>
+                {{/each}}
+            {{/if}}
+          </form>
+        </div>

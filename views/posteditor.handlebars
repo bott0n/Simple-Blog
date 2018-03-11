@@ -1,0 +1,61 @@
+{{#if user}}
+<div id='editor-panel'>
+
+
+<h2>Post Editor</h2>
+
+<br>
+<div id='editor'>
+
+    
+<!-- C:\Users\user\Desktop\Programme\github\nodeLogin\node_modules\@ckeditor\ckeditor5-build-classic\build\ckeditor.js-->
+<script src='/js/ckeditor/ckeditor.js'></script>
+
+
+ <div class="mb-3">
+              <label>Title </label>
+              <input  class="form-control" id='title' placeholder="Title" name='title'>
+             
+            </div>         
+<textarea name="content" id="content" style="overflow:hidden"></textarea>
+<hr>
+<input class='btn btn-primary btn-lg btn-block ' type = 'button' value = 'Post' onclick = 'sendData();'>
+
+
+
+
+<script>
+CKEDITOR.replace( 'content', {});
+</script>
+<script>
+    function sendData(){
+     
+        var title=$('#title').val();
+        var htmldata = CKEDITOR.instances.content.getData();
+
+    
+        
+        $.ajax({
+            type:'POST',
+            url: "/article/posteditor", 
+            data: {"data": htmldata,
+                    "title":title},
+            success:function(){
+                window.location = '/article'
+            },
+            error:function(){
+                alert('Post failed')
+            }
+            
+    } )
+
+
+    }
+</script>
+</div>
+
+</div>
+ {{else}}
+                <h3>Please login!</h3>
+
+{{/if}}

@@ -1,0 +1,57 @@
+<script>
+    function getData(){
+        
+        $.ajax({
+            type:'POST',
+            url: "/article", 
+           
+            success:function(data){
+              alert(data)
+            },
+            error:function(){
+                alert('Post failed')
+            }
+            
+    } )
+
+
+    }
+</script>
+<div id='article' onload='getData()'>
+
+<h2>Article page</h2>
+
+<br>
+<div class='article-panel'>
+    {{#each data}}
+    <div class="container "style='border-radius:45px;'>
+      <div class="jumbotron mt-3" style='padding:20px;'>
+        <h1><a href='/article/post/{{_id}}'>{{title}}</a></h1>
+        <p class="lead">Posted by {{user}}</p>
+        <span class="lead small">Posted at {{postDate}}</span>
+      </div>
+    </div>
+
+    {{/each}}
+    
+
+</div>
+<br>
+<p>
+    
+    <a class='btn btn-outline-primary'href="?page=1">Go back</a>
+    <a class='btn btn-outline-primary'href="?page={{back2Page}}">{{back2Page}}</a>
+    <a class='btn btn-outline-primary'href="?page={{backPage}}">{{backPage}}</a>
+    <a class='btn btn-outline-primary'href="?page={{nowPage}}">{{nowPage}}</a>
+    <a class='btn btn-outline-primary'href="?page={{nextPage}}">{{nextPage}}</a>
+    <a class='btn btn-outline-primary'href="?page={{next2Page}}">{{next2Page}}</a>
+    <a class='btn btn-outline-primary'href="?page={{next3Page}}">{{next3Page}}</a>
+
+</p>
+<hr>
+{{#if user}}
+<a href='/article/posteditor'><div class='btn btn-primary btn-lg btn-block' >Post</div></a>
+{{/if}}
+
+
+</div>
