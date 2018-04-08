@@ -11,7 +11,7 @@ var LocalStrategy = require('passport-local').Strategy;
 var mongo = require('mongodb');
 var mongoose = require('mongoose');
 //Your mongo db
-mongoose.connect('mongodb://localhost/loginapp')
+mongoose.connect('mongodb://admin:qq7895123@loginapp-shard-00-00-oa7mk.mongodb.net:27017,loginapp-shard-00-01-oa7mk.mongodb.net:27017,loginapp-shard-00-02-oa7mk.mongodb.net:27017/test?ssl=true&replicaSet=loginapp-shard-0&authSource=admin')
 var db = mongoose.connection;
 
 
