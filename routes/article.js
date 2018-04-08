@@ -11,7 +11,7 @@ router.get('/',function(req,res){
 	
 	
 
-
+	
 	var nowPage = req.query.page||1;
 	
 	var db_limit =parseInt(nowPage)*4
@@ -26,8 +26,8 @@ router.get('/',function(req,res){
 	var next2Page = parseInt(nowPage)+2;
 	var next3Page = parseInt(nowPage)+3;
 	
+	console.log(res.user)
 
-	
 	Post.getPost(db_limit,db_skip,function(err,docs){
 		
 	
@@ -50,13 +50,50 @@ router.get('/',function(req,res){
 
 router.get('/post/:id',function(req,res){
 	var article_id=req.params.id
-	Post.getPostById(article_id,function(err,docs){
 
-		res.render('articleContent',{
-			data:docs
-		})
-		console.log(typeof docs)
+	var username=''
+
+	var isOwner = false;
+	
+	if(req.user){
+		username=req.user.username
+	}
+
+	
+	Post.getPostById(article_id,function(err,docs){
+		if(!err){
+			console.log(username==docs[0].user)
+			if(username==docs[0].user){
+				isOwner = true;
+			}
+			res.render('articleContent',{
+				data:docs,
+				isOwner:isOwner
+			})
+		}else{
+			res.render('404')
+		}
+
+
+		
+		
+	
 	})
+
+})
+
+router.post('/post',function(req,res){
+	
+	res.send('ok')
+	var post_id = req.body.post_id;
+	Post.deletePostById(post_id,req.user.username,function(err){
+		if(!err){
+			console.log('delete success!')
+		}else{
+			console.log('delete failed!')
+		}
+	})
+	
 
 })
 
@@ -111,6 +148,7 @@ router.post('/posteditor',function(req,res){
 		console.log('post failed')
 	}
 	res.send('ok')
+	
 })
 
 

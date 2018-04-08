@@ -34,5 +34,14 @@ module.exports.getPost = function(nowPage,skipNum,callback){
 }
 
 module.exports.getPostById = function(id,callback){
-    Post.find({_id:id}).exec(function(err, docs) { callback(err,docs)});
+    Post.find({_id:id}).exec(function(err, docs) { 
+        callback(err,docs)
+        
+    });
+}
+
+module.exports.deletePostById = function(id,user,callback){
+    Post.remove({'_id':id,'user':user}).exec(function(err){
+        callback(err)
+    })
 }

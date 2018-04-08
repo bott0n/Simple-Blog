@@ -100,11 +100,20 @@ router.post('/register',function(req,res){
     
 
 });
-
+//login post and call passport to verify
+router.post('/login',
+passport.authenticate('local',
+                     { successRedirect: '/',
+                     failureRedirect: '/users/login',
+                     failureFlash: true ,
+                     badRequestMessage: 'Please insert all blank'}
+                     
+));
+// Passport will auto find req.body.username and password
 passport.use(new LocalStrategy(
     function(username, password, done) {
         
-
+        
         // check username 
         User.getUserByUserName(username,function(err,user){
 
@@ -142,6 +151,7 @@ passport.use(new LocalStrategy(
     done(null, user.username);
     
     console.log(user.username+' has login!'+'    '+date)
+    
   });
   
   passport.deserializeUser(function(username, done) {
@@ -152,17 +162,8 @@ passport.use(new LocalStrategy(
     });
   });
   
+  
 
-
-//login post
-router.post('/login',
-            passport.authenticate('local',
-                                 { successRedirect: '/',
-                                 failureRedirect: '/users/login',
-                                 failureFlash: true ,
-                                 badRequestMessage: 'Please insert all blank'}
-                                 
-           ));
 
 router.get('/logout', function(req, res){
 

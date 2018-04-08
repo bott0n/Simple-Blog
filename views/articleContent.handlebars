@@ -2,7 +2,33 @@
 <div style='word-break: break-all;'>
  {{#each data}}
     <h1>{{title}}</h1>
+   
     <hr>
     <div>{{{content}}}</div>
+    written by {{user}}
+ 
     {{/each}}
     </div>
+{{#if isOwner}}
+<script>
+    function deletePost(){
+        
+            $.ajax({
+                type:'POST',
+                url: "/article/post", 
+            
+                data:{'post_id':window.location.pathname.substr(14)},
+                success:function(){
+                    window.location = '/article'
+                },
+                error:function(){
+                    alert('Post failed')
+                }
+                
+        } )
+
+
+    }</script>
+    <button class='delete' onclick='deletePost()'>Delete</button>
+    
+{{/if}}
