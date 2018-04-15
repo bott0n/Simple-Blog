@@ -49,5 +49,10 @@
     box-shadow:0 0 0 0;
 
 }
-  
-  
+#chatroom form { border:5px solid black; padding: 3px; position: fixed; bottom: 20px; width: 40%; }
+#chatroom form input { border:1px solid bisque; padding: 10px; width: 90%; }
+#chatroom form button { width: 9%; background: rgb(130, 224, 255); border: none; padding: 10px; }
+#chatroom #messages{
+    background: rgb(230, 230, 241);
+    min-height:800px;
+}

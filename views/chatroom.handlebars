@@ -1,0 +1,40 @@
+
+<div id='chatroom'>
+    <h1>Chat Room   </h1>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.0/socket.io.js"></script>
+    <script>
+      $(function () {
+        var socket = io.connect();
+        $('form').submit(function(){
+         
+          socket.emit('chat message',`<div class='row'><div class='col-md-2' >`+$('.username').text()+': '+`</div><div class='col-md-8'>`+ $('#ms').val())+`</div></div>`;
+          $('#ms').val('');
+          return false;
+        });
+        socket.on('chat message', function(msg){
+            
+          var m = msg
+          
+          $('#messages').append(msg);
+          window.scrollTo(0, document.body.scrollHeight);
+        });
+      });
+    </script>
+    
+<div id="messages">
+
+</div>
+{{#if user}}
+
+<div>    
+    <form action="">
+      <input id="ms" placeholder="Here , input your message"/><button>Send</button>
+    </form>
+</div>
+<span class='username' style='display:none'>{{username}}</span>
+{{else}}
+<h1>Please login to chat!</h1>
+{{/if}}
+
+</div>

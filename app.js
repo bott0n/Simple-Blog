@@ -10,22 +10,48 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var mongo = require('mongodb');
 var mongoose = require('mongoose');
-<<<<<<< HEAD
-//Your mongo db
 mongoose.connect('mongodb://admin:qq7895123@loginapp-shard-00-00-oa7mk.mongodb.net:27017,loginapp-shard-00-01-oa7mk.mongodb.net:27017,loginapp-shard-00-02-oa7mk.mongodb.net:27017/test?ssl=true&replicaSet=loginapp-shard-0&authSource=admin')
-=======
 
 mongoose.connect('mongodb://localhost/loginapp')
->>>>>>> 8970380de90e17d350a076e2d8afa20fd85fb5cd
 var db = mongoose.connection;
 
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var article = require('./routes/article');
+var chatroom = require('./routes/chatroom');
 
 // init app 
 var app=express();
+//set port
+app.set('port', (process.env.PORT||3000));
+
+
+var http = require('http');
+
+var server = http.createServer(app);
+
+var io = require('socket.io').listen(server);
+
+
+io.on('connection', function(socket) {
+    
+    socket.on('chat message', function(msg){
+    
+        io.emit('chat message',msg);
+        });
+    console.log('Client connected.');
+
+   
+});
+
+
+server.listen(app.get('port'),function(){
+    console.log('server started at '+app.get('port'))
+})
+
+
+
 
 //view engine
 app.set('views',path.join(__dirname,'views'));
@@ -91,6 +117,7 @@ app.use('/',routes);
 app.use('/index',routes);
 app.use('/users',users);
 app.use('/article',article);
+app.use('/chatroom',chatroom);
 
 //set 404 page
 app.use(function(req, res, next){
@@ -100,13 +127,6 @@ app.use(function(req, res, next){
 
 
 });
-
-//set port
-app.set('port', (process.env.PORT||3000));
-
-app.listen(app.get('port'),function(){
-    console.log('server started at '+app.get('port'))
-})
 
 
 
